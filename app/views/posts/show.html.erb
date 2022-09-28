@@ -1,0 +1,59 @@
+
+
+
+
+<div class=' m-3 d-flex justify-content-between'>
+    <%if !current_user.user? %>
+      <%if  published?(@post) %>
+        <div >
+          <%= link_to 'Unpublish', unpublish_post_path(@post) , method: :patch, remote: true ,class: 'card-link text-decoration-none btn btn-danger ' %>
+        </div>
+      <%else%>
+        <div>
+          <%= link_to 'Publish', publish_post_path(@post) , method: :patch , remote: true ,class: 'card-link text-decoration-none btn btn-success ' %>
+        </div>
+      <%end%>
+    <%end%>
+</div>
+
+<div class = 'row '>
+  <div class = col-md-12  >
+    <div class= 'card m-3'>
+      <div class = 'card-body'>
+        <div class="card-title d-flex justify-content-between">
+          <h3 class = 'card-title mb-4'><%= @post.title %></h3>
+          <%= link_to like_post_path(@post), class: 'like-btn', method: :put, remote: true do %>
+            <div >
+              <span><i class='fa fa-thumbs-up fa-2x'></i></span>
+              Likes:<span class='likes-count'><%= @post.get_upvotes.size%></span>
+            </div>
+          <%end%>
+        </div>
+        <p class= 'card-text text-secondary'>
+          <strong>Created By:</strong>
+          <%= @post.user.email %>
+        </p>
+        <p class= 'card-text'>
+          <strong>Description:</strong>
+          <%= @post.description %>
+          <%= @post.content %>
+        </p>
+      </div>
+      <div class=' m-3 d-flex justify-content-between'>
+        <%if current_user.user?%>
+          <%if published?(@post)%>
+            <%= render partial: '/reports/report_unreport', locals: {post: @post, type: 'Post'}%>
+          <%end%>
+        <%end%>
+        <div>
+          <% if published?(@post)%>
+            <%= link_to 'Suggestions?', new_suggestion_path(id: @post.id)  %>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%if @post.published%>
+  <%= render partial: '/comments/comment_block' , local: {post: @post, parent: nil}%>
+<%end%>

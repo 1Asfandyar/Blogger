@@ -1,0 +1,9 @@
+<div class="card m-3 bg-light">
+  <div class="card-body">
+    <p class="font-weight-bold">Comments</p>
+    <div id='first-comment'></div>
+    <%= render partial: '/comments/all_comment' , locals: {comments: @post.comments} %>
+    <%= render partial: '/comments/comment_form' , locals: {parent: nil}%>
+  </div>
+</div>
+

@@ -1,0 +1,22 @@
+
+<% posts.each do |post|%>
+  <%post.suggestions.each do |suggestion|%>
+    <%if published?(post)%>
+      <%if post.user_id == current_user.id and suggestion.parent_id.nil?%>
+        <div class='jumbotron container mt-5 p-1 shadow' >
+            <div class="card-title d-flex justify-content-between m-3">
+            <h4>Suggestion on :<%= post.title.capitalize %></h4>
+            </div>
+            <div class="card-text text-secondary ml-3"><span >By :</span><%= suggestion.user.email %></div>
+            <div class="card-text ml-3"><%=suggestion.body%></div>
+            <%= render partial: '/suggestions/reply_form' , locals: {suggestion: suggestion, parent: suggestion, post: post}%>
+            <div class= 'btn-group ml-3 mr-3 mb-3'>
+              <%= link_to 'Accept', edit_post_path(post) , class: 'card-link text-decoration-none btn btn-dark mt-2' %>
+              <%= link_to 'Reject', suggestion, method: :delete , remote: true,class: 'card-link text-decoration-none btn btn-secondary  mt-2' %>
+            </div>
+        </div>
+      <%end%>
+    <%end%>
+  <%end%>
+<%end%>
+

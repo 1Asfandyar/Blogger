@@ -1,0 +1,32 @@
+
+</table>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Report item</th>
+      <th scope="col">Title</th>
+      <th scope="col">Reported by</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reports.each do |data| %>
+      <tr>
+        <th scope="row"></th>
+        <td><%= data.reportable_type %></td>
+        <%if data.reportable_type == 'Post'%>
+          <td>
+          <%= link_to post_path(data.reportable_id) do%>
+            <%= Post.find_by(id: data.reportable_id).title %></td>
+          <%end%>
+        <%else%>
+        <td>
+          <%= link_to post_path(Comment.find_by(id: data.reportable_id).post_id) do%>
+            <%= Comment.find_by(id: data.reportable_id).body%></td>
+          <%end%>
+        <%end%>
+        <td><%= data.user.email %></td>
+      </tr>
+     <%end%>
+  </tbody>
+</table>

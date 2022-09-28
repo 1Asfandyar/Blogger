@@ -1,0 +1,20 @@
+<% current_user.suggestions.each do |suggestion| %>
+  <% if post.id == suggestion.post.id%>
+    <%if suggestion.parent_id.nil?%>
+      <div class="card ml-5 mr-5 mb-2">
+          <div class="card-body text-secondary">
+            <%=suggestion.body %>
+            <%if suggestion.replies.any?%>
+              <%suggestion.replies.each do |reply|%>
+                  <div class="card ml-5 mr-5 mb-2">
+                      <div class="card-body text-secondary">
+                            <p class='text-primary'>Reply from Author:</p><%=reply.body%>
+                      </div>
+                    </div>
+              <%end%>
+            <%end%>
+          </div>
+      </div>
+  <%end%>
+  <%end%>
+<%end%>

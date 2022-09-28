@@ -1,0 +1,9 @@
+  <%if !@comment.parent_id%>
+    $('#first-comment').append("<%= j render partial: 'comment', locals: {comment: @comment}%>");
+    tf = document.getElementById('comment_body')
+    tf.value = ""
+  <%else%>
+      $('#reply').append("<%= j render partial: 'comment', locals: {comment: @comment, parent: @comment}%>");
+      tf = document.getElementById('rply-form')
+      tf.value = ""
+  <%end%>

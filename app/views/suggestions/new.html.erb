@@ -1,0 +1,3 @@
+<%= render partial: '/suggestions/suggestion_form' , locals: {suggestion: @suggestion, parent: nil}%>
+<h2 class= 'ml-5'> Your Previous Suggestion on <%=@post.title%></h2>
+<%= render partial: '/suggestions/current_user_suggestion' , locals: {suggestions: @post.suggestions, post: @post}%>

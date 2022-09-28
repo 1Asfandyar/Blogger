@@ -1,0 +1,10 @@
+  <%if reported?(current_user, post, type)%>
+    <%= link_to report_path(post.id), method: :delete, remote: true, data: { confirm: 'Are you sure to unreport?' } , class: 'card-link text-decoration-none ' do%>
+      Reported<%= render partial: '/reports/report_icon'%>
+    <%end%>
+
+  <%else%>
+    <%= link_to  reports_path(reportable_id: post.id, reportable_type: type), data: { confirm: 'Are you sure to Report?' } , method: :post, remote: true, class: 'card-link text-decoration-none ' do%>
+      Report<%= render partial: '/reports/unreport_icon'%>
+    <%end%>
+  <%end%>

@@ -1,0 +1,12 @@
+
+<%= form_with( validate: true) do |f| %>
+      <div class="form-group m-5">
+          <% if !parent.nil?%>
+            <input type='hidden' name="suggestion[parent_id]" value="<%= parent.id%>" >
+            <input type='text' name="suggestion[body]" pattern="[a-zA-^\s-Z0-9]*" minlength="5" maxlength="30">
+            <input type='hidden' name="suggestion[post_id]" value="<%= post.id%>" >
+            <input type='hidden' name="suggestion[user_id]" value="<%= current_user.id%>" >
+            <%= f.submit 'Reply', class: 'btn btn-dark mt-2' %>
+          <%end%>
+      </div>
+<% end %>

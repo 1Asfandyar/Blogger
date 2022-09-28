@@ -1,0 +1,15 @@
+<%if @comment.parent_id.nil? %>
+  <%if current_user.liked? @comment%>
+    $('.comment-like-btn-<%=@comment.id%>').addClass('liked');
+  <%else%>
+    $('.comment-like-btn-<%=@comment.id%>').addClass('like-btn');
+  <%end%>
+  $('.comment-likes-count-<%=@comment.id%>').html("<%= @comment.get_upvotes.size%>")
+<%elsif !@comment.parent_id.nil? %>
+    <%if current_user.liked? @comment%>
+    $('.reply-like-btn').addClass('liked');
+  <%else%>
+    $('.reply-like-btn').addClass('like-btn');
+  <%end%>
+  $('.reply-likes-count').html("<%= @comment.get_upvotes.size%>")
+<%end%>

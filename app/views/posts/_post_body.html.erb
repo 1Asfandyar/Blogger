@@ -1,0 +1,48 @@
+<div id="deletePost<%=post.id%>">
+  <div class='jumbotron container mt-3 p-1 shadow' >
+      <div class="card-title d-flex justify-content-between">
+        <%if post.published?%>
+            <div class = "badge badge-success text-white ml-3 mr-3 mt-3"><span>Published </span></div>
+        <%else%>
+            <div class = "badge badge-primary text-white ml-3 mr-3 mt-3"><span>Not Published </span></div>
+        <%end%>
+
+        <%if post.user_id == current_user.id or  !current_user.user?%>
+            <%= render partial: '/shared/delete_button' , locals: {post: post}%>
+        <%end%>
+
+      </div>
+
+
+      <div class="card-body">
+        <div class="card-title d-flex justify-content-between"><h4><%= post.title.capitalize %></h4>
+        </div>
+        <div class="card-text"><%= post.description.truncate(200) %></div>
+          <%if post.published%>
+            <div class="card-text text-secondary"><span >Likes:</span><span class='likes-count'><%= post.get_upvotes.size%></span></div>
+            <%if !post.comments.first.nil?%>
+              <div class="card-text text-secondary"><span >Recent Comment :</span> "<%= post.comments.order('created_at DESC').first.body%>"</div>
+            <%end%>
+          <%end%>
+          <%if current_user.user? %>
+            <%if post.user_id == current_user.id or !current_user.user?%>
+              <div class= 'btn-group'>
+                <%= link_to 'Show', post , class: 'card-link text-decoration-none btn btn-dark mt-2' %>
+                <%= link_to 'Edit', edit_post_path(post),class: 'card-link text-decoration-none btn btn-secondary  mt-2' %>
+              </div>
+            <%else%>
+              <div class="card-title d-flex justify-content-between">
+                  <div><%= link_to 'Show', post , class: 'card-link text-decoration-none btn btn-dark mt-2' %></div>
+              </div>
+            <%end%>
+
+          <%else%>
+            <div class="card-text text-secondary"><span ><%= post.user.role %>:</span><%= post.user.email %></div>
+            <div class= 'btn-group'>
+                <%= link_to 'Show', post , class: 'card-link text-decoration-none btn btn-dark mt-2' %>
+            </div>
+            <br>
+          <%end%>
+      </div>
+  </div>
+</div>

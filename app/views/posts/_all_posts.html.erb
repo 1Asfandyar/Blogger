@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <%= render partial: '/shared/below_image_tag', locals: {tag: post_type}%>
+  </thead>
+
+  <tbody>
+    <% if !@posts.nil?%>
+      <% @posts.each do |post| %>
+          <%= render partial: '/posts/post_body', locals: {post: post}%>
+      <%end %>
+    <%else%>
+      <h1>Bad Request</h1>
+    <%end%>
+  </tbody>
+</table>
+
+

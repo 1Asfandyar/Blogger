@@ -1,0 +1,19 @@
+
+<%= form_with(model: [suggestion], validate: true) do |f| %>
+      <div class="form-group m-5">
+          <% if !parent.nil?%>
+          <input type='hidden' name="suggestion[parent_id]" value="<%= parent.id%>" >
+          <%end%>
+          <%if parent.nil?%>
+            <%= f.label 'Your Suggestion' , class: 'font-weight-bold mt-3 md-3'%>
+            <input type='hidden' name="suggestion[post_id]" value="<%= @post.id%>" >
+            <input type='hidden' name="suggestion[user_id]" value="<%= current_user.id%>" >
+            <%= f.text_area :body, required: true,  class: 'form-control' %>
+            <%= f.submit 'Submit', class: 'btn btn-dark mt-2' %>
+          <%else%>
+            <%= f.text_area :body, class: 'form-control mt-2 '%>
+            <input type='hidden' name="suggestion[post_id]" value="<%= @post.id%>" >
+            <%= f.submit 'Reply', class: 'btn btn-dark mt-2' %>
+          <%end%>
+      </div>
+<% end %>

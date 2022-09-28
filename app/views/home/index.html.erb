@@ -1,0 +1,7 @@
+<%= render partial: '/posts/post_image'%>
+<h1 class= 'mt-5 pl-5' >Recent Posts </h1>
+<%= render partial: '/posts/all_posts' , locals: {post_type: @post_type}%>
+<div class= 'pl-70 '>
+    <%= raw pagy_bootstrap_nav(@pagy)%>
+<div>
+
