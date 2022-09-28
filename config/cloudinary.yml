@@ -1,0 +1,11 @@
+development:
+  cloud_name: "du5o5nizf"
+  api_key: "762619493528379"
+  api_secret: "vnVMKOK1l6SF9CSSkqGs-HdVMSc"
+  secure: true
+
+production:
+  cloud_name: "du5o5nizf"
+  api_key: "762619493528379"
+  api_secret: "vnVMKOK1l6SF9CSSkqGs-HdVMSc"
+  secure: true
